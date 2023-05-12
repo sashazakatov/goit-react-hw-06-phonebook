@@ -1,5 +1,4 @@
-// import { useState } from 'react'
-// import PropTypes from "prop-types";
+import { useEffect } from 'react'
 import css from './ContactForm.module.css'
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +9,10 @@ const ContactForm = () => {
 
     const dispatch = useDispatch();
     const contacts = useSelector(getContacts);
+
+    useEffect(() => {
+        localStorage.setItem('contacts', JSON.stringify(contacts));
+    }, [contacts]);
 
     const isContactExists = (value) => {
         return contacts.find(({name}) => name.toLowerCase() === value.toLowerCase());
@@ -32,8 +35,6 @@ const ContactForm = () => {
             name: name.value,
             number: number.value,
         }))
-        
-        localStorage.setItem('contacts', JSON.stringify(contacts));
 
         form.reset();
     }
@@ -68,7 +69,5 @@ const ContactForm = () => {
         </form>
     )
 }
-// ContactForm.propTypes = {
-//     onSubmit: PropTypes.func.isRequired,
-// }
+
 export default ContactForm;
