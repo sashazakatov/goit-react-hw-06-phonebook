@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid'
 
 const contactsSlice = createSlice({
     name: 'contacts',
-    initialState: JSON.parse(localStorage.getItem('contacts') ?? []),
+    initialState: JSON.parse(localStorage.getItem('contacts')) ?? [] ,
     reducers:{
         addTask:{
             reducer(state, action){
@@ -19,8 +19,11 @@ const contactsSlice = createSlice({
                 };
             },
         },
+        removeTask(state, action){
+            return state.filter(({id}) => id !== action.payload);
+        }
     },
 });
 
-export const { addTask } = contactsSlice.actions;
+export const { addTask, removeTask } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
