@@ -22,12 +22,10 @@ const ContactForm = () => {
         e.preventDefault();
 
         const form = e.target;
-
         const {name, number} = e.target.elements;
 
         if(isContactExists(name.value)){
             alert(`${name.value} is already in contacts`);
-            form.reset();
             return;
           }
 
